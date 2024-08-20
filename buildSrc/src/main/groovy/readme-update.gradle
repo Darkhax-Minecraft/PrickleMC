@@ -74,8 +74,14 @@ static String buildSponsors(Project project) {
 static String updateSection(String inputText, String region, String text) {
     var startComment = commentOf("${region}-start")
     var startPos = inputText.indexOf(startComment) + startComment.length()
+    if (startPos == -1) {
+        return inputText
+    }
     var endComment = commentOf("${region}-end")
     var endPos = inputText.indexOf(endComment)
+    if (endPos == -1) {
+        return inputText
+    }
     return inputText.substring(0, startPos) + System.lineSeparator() + text + System.lineSeparator() + inputText.substring(endPos)
 }
 
