@@ -8,13 +8,10 @@ public class PrickleMod {
     private boolean hasInitialized = false;
 
     public void init() {
-
         if (hasInitialized) {
             throw new IllegalStateException("The " + Constants.MOD_NAME + " has already been initialized.");
         }
-
         this.runStartupChecks();
-
         hasInitialized = true;
     }
 
