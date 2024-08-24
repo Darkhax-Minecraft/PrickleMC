@@ -8,11 +8,13 @@ import com.google.gson.stream.JsonWriter;
 import net.darkhax.pricklemc.common.api.config.comment.CommentTypeAdapter;
 import net.darkhax.pricklemc.common.api.config.comment.ICommentResolver;
 import net.darkhax.pricklemc.common.api.config.comment.WrappedComment;
+import net.darkhax.pricklemc.common.api.config.property.IDefaultPropertyAdapters;
 import net.darkhax.pricklemc.common.api.config.property.IPropertyAdapter;
 import net.darkhax.pricklemc.common.api.config.property.RangedProperty;
 import net.darkhax.pricklemc.common.api.config.property.RegexStringProperty;
 import net.darkhax.pricklemc.common.api.config.property.array.ArrayProperty;
 import net.darkhax.pricklemc.common.api.config.property.array.CollectionArrayProperty;
+import net.darkhax.pricklemc.common.api.services.Services;
 import net.darkhax.pricklemc.common.impl.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,21 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class ConfigManager<T> {
+
+    public static <T> T load(String name, T defaultValue) {
+        final ConfigManager<T> manager = init(name, defaultValue);
+        manager.load();
+        manager.save();
+        return defaultValue;
+    }
+
+    public static <T> ConfigManager<T> init(String name, T defaultValue) {
+        final ConfigManager.Builder<T> builder = new ConfigManager.Builder<T>(Services.PLATFORM.getConfigPath().resolve(name + ".json"));
+        for (IDefaultPropertyAdapters plugin : Services.loadMany(IDefaultPropertyAdapters.class)) {
+            plugin.register(builder::adapter);
+        }
+        return builder.build(defaultValue);
+    }
 
     /**
      * The path to the config file.
