@@ -16,6 +16,7 @@ import net.darkhax.pricklemc.common.api.config.property.array.ArrayProperty;
 import net.darkhax.pricklemc.common.api.config.property.array.CollectionArrayProperty;
 import net.darkhax.pricklemc.common.api.services.Services;
 import net.darkhax.pricklemc.common.impl.Constants;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,20 +32,66 @@ import java.util.function.Consumer;
 
 public class ConfigManager<T> {
 
+    /**
+     * Creates and loads a configuration file.
+     *
+     * @param name         The name of the config file. This file will use the platforms config directory.
+     * @param defaultValue The default config value.
+     * @param <T>          The type of the config object.
+     * @return The config object that was loaded.
+     */
     public static <T> T load(String name, T defaultValue) {
-        final ConfigManager<T> manager = init(name, defaultValue);
+        return load(name, defaultValue, null);
+    }
+
+    /**
+     * Creates and loads a configuration file.
+     *
+     * @param name         The name of the config file. This file will use the platforms config directory.
+     * @param defaultValue The default config value.
+     * @param configure    An optional consumer used to configure the builder before it is built.
+     * @param <T>          The type of the config object.
+     * @return The config object that was loaded.
+     */
+    public static <T> T load(String name, T defaultValue, @Nullable Consumer<ConfigManager.Builder<T>> configure) {
+        final ConfigManager<T> manager = init(name, defaultValue, configure);
         manager.load();
         manager.save();
         return defaultValue;
     }
 
+    /**
+     * Initializes a config manager with the default plugins.
+     *
+     * @param name         The name of the config file. This file will use the platforms config directory.
+     * @param defaultValue The default config value.
+     * @param <T>          The type of object held by the config manager.
+     * @return A new config manager.
+     */
     public static <T> ConfigManager<T> init(String name, T defaultValue) {
+        return init(name, defaultValue, null);
+    }
+
+    /**
+     * Initializes a config manager with the default plugins and extra user configurations applied.
+     *
+     * @param name         The name of the config file. This file will use the platforms config directory.
+     * @param defaultValue The default config value.
+     * @param configure    An optional consumer used to configure the builder before it is built.
+     * @param <T>          The type of object held by the config manager.
+     * @return A new config manager.
+     */
+    public static <T> ConfigManager<T> init(String name, T defaultValue, @Nullable Consumer<ConfigManager.Builder<T>> configure) {
         final ConfigManager.Builder<T> builder = new ConfigManager.Builder<T>(Services.PLATFORM.getConfigPath().resolve(name + ".json"));
         for (IDefaultPropertyAdapters plugin : Services.loadMany(IDefaultPropertyAdapters.class)) {
             plugin.register(builder::adapter);
         }
+        if (configure != null) {
+            configure.accept(builder);
+        }
         return builder.build(defaultValue);
     }
+
 
     /**
      * The path to the config file.
