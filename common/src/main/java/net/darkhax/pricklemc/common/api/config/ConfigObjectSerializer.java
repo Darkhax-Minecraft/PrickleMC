@@ -63,7 +63,6 @@ public class ConfigObjectSerializer<T> {
                 try {
                     final IConfigProperty<?> property = this.propertyResolver.toProperty(field, dataObj, valueMeta);
                     schema.put(propertyName, new SchemaEntry(field, propertyName, valueMeta, property));
-                    this.log.info("{} = {}", propertyName, property);
                 }
                 catch (Exception e) {
                     throw new RuntimeException(e);
