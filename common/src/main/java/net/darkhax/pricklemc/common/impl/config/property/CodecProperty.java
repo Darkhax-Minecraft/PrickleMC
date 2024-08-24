@@ -27,15 +27,51 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
+/**
+ * A config property where the value is serialized using a Minecraft Codec.
+ *
+ * @param <T> The type of value serialized by the codec.
+ */
 public class CodecProperty<T> extends ObjectProperty<T> {
 
+    /**
+     * Builtin support for resource locations using Mojang's codec.
+     */
     public static final Adapter<ResourceLocation> RESOURCE_LOCATION = of(ResourceLocation.class, ResourceLocation.CODEC);
+
+    /**
+     * Builtin support for block positions using Mojang's codec.
+     */
     public static final Adapter<BlockPos> BLOCK_POS = of(BlockPos.class, BlockPos.CODEC);
+
+    /**
+     * Builtin support for text components using Mojang's codec.
+     */
     public static final Adapter<Component> TEXT_COMPONENT = of(Component.class, ComponentSerialization.CODEC);
+
+    /**
+     * Builtin support for text styles using Mojang's codec.
+     */
     public static final Adapter<Style> TEXT_STYLE = of(Style.class, Style.Serializer.CODEC);
+
+    /**
+     * Builtin support for status effects using Mojang's codec.
+     */
     public static final Adapter<MobEffectInstance> EFFECT_INSTANCE = of(MobEffectInstance.class, MobEffectInstance.CODEC);
+
+    /**
+     * Builtin support for attribute modifiers using Mojang's codec.
+     */
     public static final Adapter<AttributeModifier> ATTRIBUTE_MODIFIER = of(AttributeModifier.class, AttributeModifier.CODEC);
+
+    /**
+     * Builtin support for item stacks using Mojang's codec.
+     */
     public static final Adapter<ItemStack> ITEM_STACK = of(ItemStack.class, ItemStack.CODEC);
+
+    /**
+     * Builtin support for ingredients using Mojang's codec.
+     */
     public static final Adapter<Ingredient> INGREDIENT = of(Ingredient.class, Ingredient.CODEC);
 
     private final Codec<T> codec;
@@ -57,10 +93,23 @@ public class CodecProperty<T> extends ObjectProperty<T> {
         return this.codec.decode(JsonOps.INSTANCE, json).getOrThrow().getFirst();
     }
 
+    /**
+     * Creates an adapter that will process a given type using a codec.
+     *
+     * @param classType The type to serialize using the codec.
+     * @param codec     The codec to serialize the value.
+     * @param <T>       The type being adapted.
+     * @return An adapter that uses a codec to serialize data.
+     */
     public static <T> Adapter<T> of(Type classType, Codec<T> codec) {
         return new Adapter<>(classType, codec);
     }
 
+    /**
+     * A type adapter that will use a Codec to serialize a given type.
+     *
+     * @param <T> The type to adapt and serialize.
+     */
     public static class Adapter<T> implements IPropertyAdapter<CodecProperty<T>> {
 
         private final Type type;

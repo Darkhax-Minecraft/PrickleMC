@@ -30,6 +30,16 @@ public abstract class AbstractArrayProperty<T> extends ObjectProperty<T> {
      */
     private final ArraySettings settings;
 
+    /**
+     * Constructor for an array property.
+     *
+     * @param field        The field this property represents.
+     * @param parent       The object that the field is defined on.
+     * @param defaultValue The default value of the property.
+     * @param valueMeta    Basic metadata available to most properties.
+     * @param meta         Metadata specific to the array.
+     * @param comment      The comment for the property.
+     */
     public AbstractArrayProperty(Field field, Object parent, T defaultValue, Value valueMeta, ArraySettings meta, IComment comment) {
         super(field, parent, defaultValue, valueMeta, comment);
         this.settings = meta;
