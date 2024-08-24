@@ -93,6 +93,7 @@ modrinth {
     versionName.set("${mod_name}-fabric-${minecraft_version}-$version")
     versionType.set("release")
     uploadFile.set(tasks.remapJar)
+    loaders = ["fabric", "quilt"]
     dependencies {
         required.project("fabric-api")
     }

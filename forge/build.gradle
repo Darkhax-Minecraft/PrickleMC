@@ -115,4 +115,5 @@ modrinth {
     versionName.set("${mod_name}-forge-${minecraft_version}-${version}")
     versionType.set('release')
     uploadFile.set(tasks.jar)
+    loaders = ["forge"]
 }

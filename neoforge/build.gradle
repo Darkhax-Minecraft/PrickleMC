@@ -79,5 +79,6 @@ modrinth {
     changelog = changelogText
     versionName.set("${mod_name}-neoforge-${minecraft_version}-${version}")
     versionType.set('release')
+    loaders = ["neoforge"]
     uploadFile.set(tasks.jar)
 }
