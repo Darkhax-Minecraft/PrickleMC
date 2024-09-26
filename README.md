@@ -1,7 +1,5 @@
 <!-- name-start -->
-
-# PrickleMC [![CurseForge Project](https://img.shields.io/curseforge/dt/1023259?logo=curseforge&label=CurseForge&style=flat-square&labelColor=2D2D2D&color=555555)](https://www.curseforge.com/minecraft/mc-mods/prickle) [![Modrinth Project](https://img.shields.io/modrinth/dt/aaRl8GiW?logo=modrinth&label=Modrinth&style=flat-square&labelColor=2D2D2D&color=555555)](https://modrinth.com/mod/prickle) [![Maven Project](https://img.shields.io/maven-metadata/v?style=flat-square&logoColor=D31A38&labelColor=2D2D2D&color=555555&label=Latest&logo=gradle&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fnet%2Fdarkhax%2Fpricklemc%2Fprickle-common-1.21%2Fmaven-metadata.xml)](https://maven.blamejared.com/net/darkhax/pricklemc)
-
+# PrickleMC [![CurseForge Project](https://img.shields.io/curseforge/dt/1023259?logo=curseforge&label=CurseForge&style=flat-square&labelColor=2D2D2D&color=555555)](https://www.curseforge.com/minecraft/mc-mods/prickle) [![Modrinth Project](https://img.shields.io/modrinth/dt/aaRl8GiW?logo=modrinth&label=Modrinth&style=flat-square&labelColor=2D2D2D&color=555555)](https://modrinth.com/mod/prickle) [![Maven Project](https://img.shields.io/maven-metadata/v?style=flat-square&logoColor=D31A38&labelColor=2D2D2D&color=555555&label=Latest&logo=gradle&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fnet%2Fdarkhax%2Fpricklemc%2Fprickle-common-1.21.1%2Fmaven-metadata.xml)](https://maven.blamejared.com/net/darkhax/pricklemc)
 <!-- name-end -->
 Prickle is a lightweight configuration format based on JSON. Prickle aims
 to be simple, accessible to everyday users, and be very easy to parse and
@@ -286,12 +284,9 @@ for a Minecraft type, add it to just your builder or reach out and work
 with us to add it to the base library.
 
 <!-- maven-start -->
-
 ## Maven Dependency
 
-If you are using [Gradle](https://gradle.org) to manage your dependencies, add the following into your `build.gradle`
-file. Make sure to replace the version with the correct one. All versions can be
-viewed [here](https://maven.blamejared.com/net/darkhax/pricklemc).
+If you are using [Gradle](https://gradle.org) to manage your dependencies, add the following into your `build.gradle` file. Make sure to replace the version with the correct one. All versions can be viewed [here](https://maven.blamejared.com/net/darkhax/pricklemc).
 
 ```gradle
 repositories {
@@ -302,26 +297,23 @@ repositories {
 
 dependencies {
     // NeoForge
-    implementation group: 'net.darkhax.pricklemc' name: 'prickle-neoforge-1.21' version: '21.0.0'
+    implementation group: 'net.darkhax.pricklemc' name: 'prickle-neoforge-1.21.1' version: '21.1.0'
 
     // Forge
-    implementation group: 'net.darkhax.pricklemc' name: 'prickle-forge-1.21' version: '21.0.0'
+    implementation group: 'net.darkhax.pricklemc' name: 'prickle-forge-1.21.1' version: '21.1.0'
 
     // Fabric & Quilt
-    modImplementation group: 'net.darkhax.pricklemc' name: 'prickle-fabric-1.21' version: '21.0.0'
+    modImplementation group: 'net.darkhax.pricklemc' name: 'prickle-fabric-1.21.1' version: '21.1.0'
 
     // Common / MultiLoader / Vanilla
-    compileOnly group: 'net.darkhax.pricklemc' name: 'prickle-common-1.21' version: '21.0.0'
+    compileOnly group: 'net.darkhax.pricklemc' name: 'prickle-common-1.21.1' version: '21.1.0'
 }
 ```
-
 <!-- maven-end -->
 
 <!-- sponsor-start -->
-
 ## Sponsors
 
 [![](https://assets.blamejared.com/nodecraft/darkhax.jpg)](https://nodecraft.com/r/darkhax)    
-PrickleMC is sponsored by Nodecraft. Use code **[DARKHAX](https://nodecraft.com/r/darkhax)** for 30% of your first month
-of service!
+PrickleMC is sponsored by Nodecraft. Use code **[DARKHAX](https://nodecraft.com/r/darkhax)** for 30% of your first month of service!
 <!-- sponsor-end -->
