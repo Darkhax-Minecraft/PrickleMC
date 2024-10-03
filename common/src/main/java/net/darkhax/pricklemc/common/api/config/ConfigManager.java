@@ -147,6 +147,10 @@ public class ConfigManager<T> {
 
         if (!Files.exists(this.filePath)) {
             try {
+                final Path parentDir = this.filePath.getParent();
+                if (!Files.exists(parentDir)) {
+                    Files.createDirectories(parentDir);
+                }
                 Files.createFile(this.filePath);
             }
             catch (IOException e) {
