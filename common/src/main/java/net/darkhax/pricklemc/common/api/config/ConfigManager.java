@@ -132,6 +132,7 @@ public class ConfigManager<T> {
         }
 
         try (JsonReader reader = new JsonReader(Files.newBufferedReader(this.filePath))) {
+            reader.setLenient(true);
             configSerializer.read(reader);
         }
         catch (IOException e) {
@@ -217,6 +218,9 @@ public class ConfigManager<T> {
                         // Disables some weird number serialization quirks like scientific notation
                         // being used for long numbers.
                         .setNumberToNumberStrategy(ToNumberPolicy.BIG_DECIMAL)
+
+                        // Allow GSON to use non-standard features when necessary.
+                        .setLenient()
 
                         // Registers a type adapter to handle our implementation of comments.
                         .registerTypeAdapter(WrappedComment.class, CommentTypeAdapter.INSTANCE);
