@@ -146,6 +146,20 @@ public class ConfigManager<T> {
      */
     public void save() {
 
+        if (!Files.exists(this.filePath)) {
+            try {
+                final Path parentDir = this.filePath.getParent();
+                if (!Files.exists(parentDir)) {
+                    Files.createDirectories(parentDir);
+                }
+                Files.createFile(this.filePath);
+            }
+            catch (IOException e) {
+                this.log.error("Unable to create config file at {}!", this.filePath);
+                throw new RuntimeException(e);
+            }
+        }
+
         try (JsonWriter writer = new JsonWriter(Files.newBufferedWriter(this.filePath, StandardCharsets.UTF_8))) {
             writer.setIndent(Constants.DEFAULT_INDENT);
             this.configSerializer.write(writer);
