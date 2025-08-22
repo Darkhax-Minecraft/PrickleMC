@@ -18,7 +18,7 @@ public class FabricMod implements ModInitializer {
 
     private static void checkForUpdates() {
         try {
-            final HttpURLConnection connection = (HttpURLConnection) new URL("https://updates.blamejared.com/get?n=" + Constants.MOD_ID + "&gv=" + DetectedVersion.BUILT_IN.getName() + "&ml=fabric").openConnection();
+            final HttpURLConnection connection = (HttpURLConnection) new URL("https://updates.blamejared.com/get?n=" + Constants.MOD_ID + "&gv=" + DetectedVersion.BUILT_IN.name() + "&ml=fabric").openConnection();
             connection.setRequestMethod("HEAD");
             int responseCode = connection.getResponseCode();
             if (responseCode != 200) {
