@@ -2,6 +2,8 @@ package net.darkhax.pricklemc.common.api.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.ToNumberPolicy;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -93,6 +95,18 @@ public class ConfigManager<T> {
     }
 
 
+    @Nullable
+    private static Exception checkJsonSyntax(Path path) {
+        final Gson gson = new GsonBuilder().setLenient().create();
+        try (JsonReader reader = new JsonReader(Files.newBufferedReader(path))) {
+            final JsonElement data = gson.fromJson(reader, JsonElement.class);
+            return data.isJsonObject() ? null : new JsonSyntaxException("Expected JSON to be an object, but it was " + data.getClass().getSimpleName());
+        }
+        catch (Exception e) {
+            return e;
+        }
+    }
+
     /**
      * The path to the config file.
      */
@@ -131,13 +145,27 @@ public class ConfigManager<T> {
             this.save();
         }
 
-        try (JsonReader reader = new JsonReader(Files.newBufferedReader(this.filePath))) {
-            reader.setLenient(true);
-            configSerializer.read(reader);
+        final Exception syntaxError = checkJsonSyntax(this.filePath);
+        if (syntaxError == null) {
+            try (JsonReader reader = new JsonReader(Files.newBufferedReader(this.filePath))) {
+                reader.setLenient(true);
+                configSerializer.read(reader);
+            }
+            catch (IOException e) {
+                this.log.error("Unable to load config file from {}!", this.filePath);
+                throw new RuntimeException(e);
+            }
         }
-        catch (IOException e) {
-            this.log.error("Unable to load config file from {}!", this.filePath);
-            throw new RuntimeException(e);
+        else {
+            this.log.error("Encountered syntax errors while loading config file '{}'. This means an invalid change was made to the file, or it was corrupted. New changes will not be loaded and the config file will be reset.", this.filePath, syntaxError);
+            final Path backupPath = this.filePath.resolveSibling(this.filePath.getFileName() + "." + Long.toHexString(System.nanoTime()) + ".bak");
+            try {
+                Files.copy(this.filePath, backupPath);
+                this.log.warn("A backup of your invalid config file was created in '{}'.", backupPath);
+            }
+            catch (Exception e) {
+                this.log.error("Unable to make a backup of invalid config file '{}'.", backupPath);
+            }
         }
     }
 
