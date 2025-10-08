@@ -6,7 +6,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.DetectedVersion;
 
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
 public class FabricMod implements ModInitializer {
 
@@ -18,7 +18,7 @@ public class FabricMod implements ModInitializer {
 
     private static void checkForUpdates() {
         try {
-            final HttpURLConnection connection = (HttpURLConnection) new URL("https://updates.blamejared.com/get?n=" + Constants.MOD_ID + "&gv=" + DetectedVersion.BUILT_IN.name() + "&ml=fabric").openConnection();
+            final HttpURLConnection connection = (HttpURLConnection) new URI("https://updates.blamejared.com/get?n=" + Constants.MOD_ID + "&gv=" + DetectedVersion.BUILT_IN.name() + "&ml=fabric").toURL().openConnection();
             connection.setRequestMethod("HEAD");
             int responseCode = connection.getResponseCode();
             if (responseCode != 200) {
