@@ -1,6 +1,6 @@
 package net.darkhax.pricklemc.common.impl;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,12 +31,12 @@ public class Constants {
     public static final String DEFAULT_INDENT = "  ";
 
     /**
-     * Creates a new resource location using the project namespace.
+     * Creates a new Identifier using the project namespace.
      *
-     * @param path The path of the resource location.
-     * @return A new resource location for the given path.
+     * @param path The path of the id.
+     * @return A new Identifier for the given path.
      */
-    public static ResourceLocation id(String path) {
-        return ResourceLocation.tryBuild(MOD_ID, path);
+    public static Identifier id(String path) {
+        return Identifier.tryBuild(MOD_ID, path);
     }
 }

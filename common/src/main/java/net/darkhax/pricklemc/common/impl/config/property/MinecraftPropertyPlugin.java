@@ -9,7 +9,7 @@ public class MinecraftPropertyPlugin implements IDefaultPropertyAdapters {
 
     @Override
     public void register(Consumer<IPropertyAdapter<?>> registry) {
-        registry.accept(CodecProperty.RESOURCE_LOCATION);
+        registry.accept(CodecProperty.IDENTIFIER);
         registry.accept(CodecProperty.BLOCK_POS);
         registry.accept(CodecProperty.TEXT_COMPONENT);
         registry.accept(CodecProperty.TEXT_STYLE);
