@@ -15,7 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +37,7 @@ public class CodecProperty<T> extends ObjectProperty<T> {
     /**
      * Builtin support for resource locations using Mojang's codec.
      */
-    public static final Adapter<ResourceLocation> RESOURCE_LOCATION = of(ResourceLocation.class, ResourceLocation.CODEC);
+    public static final Adapter<Identifier> RESOURCE_LOCATION = of(Identifier.class, Identifier.CODEC);
 
     /**
      * Builtin support for block positions using Mojang's codec.

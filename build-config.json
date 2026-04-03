@@ -1,0 +1,23 @@
+{
+  "mod": {
+    "name": "PrickleMC",
+    "group": "net.darkhax.pricklemc",
+    "authors": [
+      "Darkhax"
+    ],
+    "id": "prickle",
+    "license": "LGPL 2.1",
+    "description": "Bringing Prickle, the JSON based configuration file format to Minecraft.",
+    "repo": "https://github.com/Darkhax-Minecraft/PrickleMC",
+    "client": false
+  },
+  "dependencies": [],
+  "curseforge": {
+    "slug": "prickle",
+    "id": "1023259"
+  },
+  "modrinth": {
+    "slug": "prickle",
+    "id": "aaRl8GiW"
+  }
+}
