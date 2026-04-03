@@ -1,11 +1,7 @@
 package net.darkhax.pricklemc.common.api.config.property;
 
 import com.google.gson.stream.JsonWriter;
-import net.darkhax.pricklemc.common.api.annotations.RangedDouble;
-import net.darkhax.pricklemc.common.api.annotations.RangedFloat;
-import net.darkhax.pricklemc.common.api.annotations.RangedInt;
-import net.darkhax.pricklemc.common.api.annotations.RangedLong;
-import net.darkhax.pricklemc.common.api.annotations.Value;
+import net.darkhax.pricklemc.common.api.annotations.*;
 import net.darkhax.pricklemc.common.api.config.PropertyResolver;
 import net.darkhax.pricklemc.common.api.config.comment.IComment;
 import net.darkhax.pricklemc.common.api.util.NumberUtils;

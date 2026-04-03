@@ -5,7 +5,7 @@ import net.darkhax.pricklemc.common.api.annotations.Value;
 import net.darkhax.pricklemc.common.api.config.PropertyResolver;
 import net.darkhax.pricklemc.common.api.config.comment.IComment;
 import net.darkhax.pricklemc.common.api.config.property.ObjectProperty;
-import net.darkhax.pricklemc.common.impl.Constants;
+import net.darkhax.pricklemc.common.impl.PrickleMod;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -96,7 +96,7 @@ public abstract class AbstractArrayProperty<T> extends ObjectProperty<T> {
             out.setIndent("");
             this.writeArrayValues(value, out, resolver, log);
             out.endArray();
-            out.setIndent(Constants.DEFAULT_INDENT);
+            out.setIndent(PrickleMod.DEFAULT_INDENT);
         }
         else {
             out.beginArray();

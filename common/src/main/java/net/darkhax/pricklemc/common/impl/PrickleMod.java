@@ -1,35 +1,28 @@
 package net.darkhax.pricklemc.common.impl;
 
-import net.darkhax.pricklemc.common.api.services.Services;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PrickleMod {
 
-    private static PrickleMod instance;
-    private boolean hasInitialized = false;
-
-    public void init() {
-        if (hasInitialized) {
-            throw new IllegalStateException("The " + Constants.MOD_NAME + " has already been initialized.");
-        }
-        this.runStartupChecks();
-        hasInitialized = true;
-    }
-
-    private void runStartupChecks() {
-        if (Services.PLATFORM == null) {
-            throw new IllegalStateException("Services are not available.");
-        }
-    }
+    /**
+     * The ID of the mod.
+     */
+    public static final String MOD_ID = "prickle";
 
     /**
-     * Gets the mod instance. If an instance does not exist it will be created.
-     *
-     * @return The mod instance.
+     * The display name of the mod.
      */
-    public static PrickleMod getInstance() {
-        if (instance == null) {
-            instance = new PrickleMod();
-        }
-        return instance;
-    }
+    public static final String MOD_NAME = "Prickle";
+
+    /**
+     * A logger instance that should only be used by the mod.
+     */
+    public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
+
+    /**
+     * The default indent for JSON writers when writing JSON data. This is used to set and restore the indent value for
+     * config files.
+     */
+    public static final String DEFAULT_INDENT = "  ";
 }

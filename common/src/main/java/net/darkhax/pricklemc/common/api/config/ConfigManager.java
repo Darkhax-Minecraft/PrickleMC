@@ -1,10 +1,6 @@
 package net.darkhax.pricklemc.common.api.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.ToNumberPolicy;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import net.darkhax.pricklemc.common.api.config.comment.CommentTypeAdapter;
@@ -17,7 +13,7 @@ import net.darkhax.pricklemc.common.api.config.property.RegexStringProperty;
 import net.darkhax.pricklemc.common.api.config.property.array.ArrayProperty;
 import net.darkhax.pricklemc.common.api.config.property.array.CollectionArrayProperty;
 import net.darkhax.pricklemc.common.api.services.Services;
-import net.darkhax.pricklemc.common.impl.Constants;
+import net.darkhax.pricklemc.common.impl.PrickleMod;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -188,7 +184,7 @@ public class ConfigManager<T> {
         }
 
         try (JsonWriter writer = new JsonWriter(Files.newBufferedWriter(this.filePath, StandardCharsets.UTF_8))) {
-            writer.setIndent(Constants.DEFAULT_INDENT);
+            writer.setIndent(PrickleMod.DEFAULT_INDENT);
             this.configSerializer.write(writer);
         }
 
