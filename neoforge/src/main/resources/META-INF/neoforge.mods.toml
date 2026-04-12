@@ -4,9 +4,9 @@ issueTrackerURL = "https://github.com/Darkhax-Minecraft/PrickleMC/issues"
 
 [[mods]]
 modId = "prickle"
-version = "26.1.1.0"
+version = "26.1.2.0"
 displayName = "PrickleMC"
-updateJSONURL = "https://updates.blamejared.com/get?n=prickle&gv=26.1.1&ml=neoforge"
+updateJSONURL = "https://updates.blamejared.com/get?n=prickle&gv=26.1.2&ml=neoforge"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/prickle"
 logoFile = "logo_prickle.png"
 logoBlur = false

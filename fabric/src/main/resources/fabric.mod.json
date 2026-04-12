@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "prickle",
-  "version": "26.1.1.0",
+  "version": "26.1.2.0",
   "name": "PrickleMC",
   "description": "Bringing Prickle, the JSON based configuration file format to Minecraft.",
   "authors": [
