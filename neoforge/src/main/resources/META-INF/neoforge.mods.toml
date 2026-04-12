@@ -23,14 +23,14 @@ config = "prickle.neoforge.mixins.json"
 [[dependencies.prickle]]
 modId = "minecraft"
 type = "required"
-versionRange = "26.1.1"
+versionRange = "26.1"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.prickle]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.1.1-beta,)"
+versionRange = "[26.1.0.1-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
