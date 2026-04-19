@@ -1,5 +1,7 @@
 package net.darkhax.pricklemc.common.impl;
 
+import net.darkhax.pricklemc.common.api.services.Services;
+import net.darkhax.pricklemc.common.api.util.IPlatformHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,4 +27,9 @@ public class PrickleMod {
      * config files.
      */
     public static final String DEFAULT_INDENT = "  ";
+
+    /**
+     * Platform specific context and utilities.
+     */
+    public static final IPlatformHelper PLATFORM = Services.load(IPlatformHelper.class);
 }

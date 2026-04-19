@@ -80,7 +80,7 @@ public class ConfigManager<T> {
      * @return A new config manager.
      */
     public static <T> ConfigManager<T> init(String name, T defaultValue, @Nullable Consumer<ConfigManager.Builder<T>> configure) {
-        final ConfigManager.Builder<T> builder = new ConfigManager.Builder<T>(Services.PLATFORM.getConfigPath().resolve(name + ".json"));
+        final ConfigManager.Builder<T> builder = new ConfigManager.Builder<T>(PrickleMod.PLATFORM.getConfigPath().resolve(name + ".json"));
         for (IDefaultPropertyAdapters plugin : Services.loadMany(IDefaultPropertyAdapters.class)) {
             plugin.register(builder::adapter);
         }

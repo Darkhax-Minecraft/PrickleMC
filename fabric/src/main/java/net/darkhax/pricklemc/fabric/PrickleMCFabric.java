@@ -12,6 +12,7 @@ public class PrickleMCFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        PrickleMod.LOG.debug("Initializing Prickle.");
         CompletableFuture.runAsync(PrickleMCFabric::checkForUpdates);
     }
 
