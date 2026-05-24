@@ -45,7 +45,7 @@ public class ArrayProperty<T> extends AbstractArrayProperty<Object> {
 
     @Override
     public boolean isEmpty(Object value) {
-        return java.lang.reflect.Array.getLength(value) != 0;
+        return java.lang.reflect.Array.getLength(value) == 0;
     }
 
     @Override
