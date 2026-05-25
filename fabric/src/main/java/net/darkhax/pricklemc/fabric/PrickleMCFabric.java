@@ -24,6 +24,7 @@ public class PrickleMCFabric implements ModInitializer {
             if (responseCode != 200) {
                 PrickleMod.LOG.warn("Version checker is not available. Response code: {}", responseCode);
             }
+            connection.disconnect();
         }
         catch (Exception e) {
             PrickleMod.LOG.warn("Version checker is not available.", e);
