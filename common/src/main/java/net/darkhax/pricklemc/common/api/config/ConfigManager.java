@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -27,6 +28,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ConfigManager<T> {
 
@@ -134,7 +138,7 @@ public class ConfigManager<T> {
      * Loads the config file from disk. If the file does not exist it will try to generate one using the schema that was
      * mapped out when building the config manager.
      */
-    public void load() {
+    public synchronized void load() {
 
         if (!Files.exists(this.filePath)) {
             this.save();
@@ -167,29 +171,32 @@ public class ConfigManager<T> {
     /**
      * Saves the config object to the specified file path. If the file does not exist one will be created.
      */
-    public void save() {
-
-        if (!Files.exists(this.filePath)) {
+    public synchronized void save() {
+        try {
+            final Path parentDir = this.filePath.getParent();
+            if (parentDir == null) {
+                throw new IllegalStateException("Could not save the config file, no valid parent directory.");
+            }
+            if (!Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
+            }
+            final Path tempConfig = Files.createTempFile(parentDir, this.filePath.getFileName().toString(), ".tmp");
+            try(JsonWriter writer = new JsonWriter(Files.newBufferedWriter(tempConfig, StandardCharsets.UTF_8))) {
+                writer.setIndent(PrickleMod.DEFAULT_INDENT);
+                this.configSerializer.write(writer);
+            }
             try {
-                final Path parentDir = this.filePath.getParent();
-                if (!Files.exists(parentDir)) {
-                    Files.createDirectories(parentDir);
-                }
-                Files.createFile(this.filePath);
+                Files.move(tempConfig, this.filePath, REPLACE_EXISTING, ATOMIC_MOVE);
             }
-            catch (IOException e) {
-                this.log.error("Unable to create config file at {}!", this.filePath);
-                throw new RuntimeException(e);
+            catch (AtomicMoveNotSupportedException e) {
+                Files.move(tempConfig, this.filePath, REPLACE_EXISTING);
+            }
+            finally {
+                Files.deleteIfExists(tempConfig);
             }
         }
-
-        try (JsonWriter writer = new JsonWriter(Files.newBufferedWriter(this.filePath, StandardCharsets.UTF_8))) {
-            writer.setIndent(PrickleMod.DEFAULT_INDENT);
-            this.configSerializer.write(writer);
-        }
-
         catch (IOException e) {
-            this.log.error("Could not save config file to {}!", this.filePath);
+            this.log.error("Could not save config file to {}!", this.filePath, e);
             throw new RuntimeException(e);
         }
     }
