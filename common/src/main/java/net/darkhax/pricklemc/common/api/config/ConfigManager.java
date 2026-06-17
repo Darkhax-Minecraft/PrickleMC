@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -181,14 +182,17 @@ public class ConfigManager<T> {
                 Files.createDirectories(parentDir);
             }
             final Path tempConfig = Files.createTempFile(parentDir, this.filePath.getFileName().toString(), ".tmp");
-            try(JsonWriter writer = new JsonWriter(Files.newBufferedWriter(tempConfig, StandardCharsets.UTF_8))) {
+            try (JsonWriter writer = new JsonWriter(Files.newBufferedWriter(tempConfig, StandardCharsets.UTF_8))) {
                 writer.setIndent(PrickleMod.DEFAULT_INDENT);
                 this.configSerializer.write(writer);
             }
             try {
                 Files.move(tempConfig, this.filePath, REPLACE_EXISTING, ATOMIC_MOVE);
             }
-            catch (AtomicMoveNotSupportedException e) {
+            catch (AtomicMoveNotSupportedException | AccessDeniedException e) {
+                if (e instanceof AccessDeniedException) {
+                    this.log.warn("Atomic move failed. Falling back to replace operation. {}", this.filePath);
+                }
                 Files.move(tempConfig, this.filePath, REPLACE_EXISTING);
             }
             finally {
