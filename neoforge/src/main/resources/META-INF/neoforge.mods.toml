@@ -4,9 +4,9 @@ issueTrackerURL = "https://github.com/Darkhax-Minecraft/PrickleMC/issues"
 
 [[mods]]
 modId = "prickle"
-version = "26.1.2.0"
+version = "26.2.0.0"
 displayName = "PrickleMC"
-updateJSONURL = "https://updates.blamejared.com/get?n=prickle&gv=26.1.2&ml=neoforge"
+updateJSONURL = "https://updates.blamejared.com/get?n=prickle&gv=26.2&ml=neoforge"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/prickle"
 logoFile = "logo_prickle.png"
 logoBlur = false
@@ -23,14 +23,14 @@ config = "prickle.neoforge.mixins.json"
 [[dependencies.prickle]]
 modId = "minecraft"
 type = "required"
-versionRange = "26.1"
+versionRange = "26.2"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.prickle]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.0.1-beta,)"
+versionRange = "[26.2.0.1-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
