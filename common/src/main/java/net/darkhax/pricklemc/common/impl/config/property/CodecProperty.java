@@ -11,15 +11,6 @@ import net.darkhax.pricklemc.common.api.config.PropertyResolver;
 import net.darkhax.pricklemc.common.api.config.comment.IComment;
 import net.darkhax.pricklemc.common.api.config.property.IPropertyAdapter;
 import net.darkhax.pricklemc.common.api.config.property.ObjectProperty;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -33,46 +24,6 @@ import java.lang.reflect.Type;
  * @param <T> The type of value serialized by the codec.
  */
 public class CodecProperty<T> extends ObjectProperty<T> {
-
-    /**
-     * Builtin support for resource locations using Mojang's codec.
-     */
-    public static final Adapter<Identifier> RESOURCE_LOCATION = of(Identifier.class, Identifier.CODEC);
-
-    /**
-     * Builtin support for block positions using Mojang's codec.
-     */
-    public static final Adapter<BlockPos> BLOCK_POS = of(BlockPos.class, BlockPos.CODEC);
-
-    /**
-     * Builtin support for text components using Mojang's codec.
-     */
-    public static final Adapter<Component> TEXT_COMPONENT = of(Component.class, ComponentSerialization.CODEC);
-
-    /**
-     * Builtin support for text styles using Mojang's codec.
-     */
-    public static final Adapter<Style> TEXT_STYLE = of(Style.class, Style.Serializer.CODEC);
-
-    /**
-     * Builtin support for status effects using Mojang's codec.
-     */
-    public static final Adapter<MobEffectInstance> EFFECT_INSTANCE = of(MobEffectInstance.class, MobEffectInstance.CODEC);
-
-    /**
-     * Builtin support for attribute modifiers using Mojang's codec.
-     */
-    public static final Adapter<AttributeModifier> ATTRIBUTE_MODIFIER = of(AttributeModifier.class, AttributeModifier.CODEC);
-
-    /**
-     * Builtin support for item stacks using Mojang's codec.
-     */
-    public static final Adapter<ItemStack> ITEM_STACK = of(ItemStack.class, ItemStack.CODEC);
-
-    /**
-     * Builtin support for ingredients using Mojang's codec.
-     */
-    public static final Adapter<Ingredient> INGREDIENT = of(Ingredient.class, Ingredient.CODEC);
 
     private final Codec<T> codec;
 
