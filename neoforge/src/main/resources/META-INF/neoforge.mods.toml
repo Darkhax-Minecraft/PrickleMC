@@ -10,7 +10,7 @@ updateJSONURL = "https://updates.blamejared.com/get?n=prickle&gv=26.2&ml=neoforg
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/prickle"
 logoFile = "logo_prickle.png"
 logoBlur = false
-credits = "This project is made possible with Patreon support from players like you. Thank you! lothrazar, techsquirrel, Keyana , Darkosto, Tobias Ward, noobanidus"
+credits = "This project is made possible with Patreon support from players like you. Thank you! lothrazar, techsquirrel, Tobias Ward, noobanidus"
 authors = "Darkhax"
 description = "Bringing Prickle, the JSON based configuration file format to Minecraft."
 
@@ -30,7 +30,7 @@ side = "BOTH"
 [[dependencies.prickle]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.2.0.1-beta,)"
+versionRange = "[26.2.0.8-beta,)"
 ordering = "NONE"
 side = "BOTH"
 

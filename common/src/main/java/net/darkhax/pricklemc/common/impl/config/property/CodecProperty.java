@@ -34,46 +34,6 @@ import java.lang.reflect.Type;
  */
 public class CodecProperty<T> extends ObjectProperty<T> {
 
-    /**
-     * Builtin support for resource locations using Mojang's codec.
-     */
-    public static final Adapter<Identifier> RESOURCE_LOCATION = of(Identifier.class, Identifier.CODEC);
-
-    /**
-     * Builtin support for block positions using Mojang's codec.
-     */
-    public static final Adapter<BlockPos> BLOCK_POS = of(BlockPos.class, BlockPos.CODEC);
-
-    /**
-     * Builtin support for text components using Mojang's codec.
-     */
-    public static final Adapter<Component> TEXT_COMPONENT = of(Component.class, ComponentSerialization.CODEC);
-
-    /**
-     * Builtin support for text styles using Mojang's codec.
-     */
-    public static final Adapter<Style> TEXT_STYLE = of(Style.class, Style.Serializer.CODEC);
-
-    /**
-     * Builtin support for status effects using Mojang's codec.
-     */
-    public static final Adapter<MobEffectInstance> EFFECT_INSTANCE = of(MobEffectInstance.class, MobEffectInstance.CODEC);
-
-    /**
-     * Builtin support for attribute modifiers using Mojang's codec.
-     */
-    public static final Adapter<AttributeModifier> ATTRIBUTE_MODIFIER = of(AttributeModifier.class, AttributeModifier.CODEC);
-
-    /**
-     * Builtin support for item stacks using Mojang's codec.
-     */
-    public static final Adapter<ItemStack> ITEM_STACK = of(ItemStack.class, ItemStack.CODEC);
-
-    /**
-     * Builtin support for ingredients using Mojang's codec.
-     */
-    public static final Adapter<Ingredient> INGREDIENT = of(Ingredient.class, Ingredient.CODEC);
-
     private final Codec<T> codec;
 
     public CodecProperty(Field field, Object parent, T defaultValue, Value valueMeta, IComment comment, Codec<T> codec) {
