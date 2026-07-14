@@ -173,16 +173,13 @@ public class ConfigManager<T> {
      */
     public void save() {
 
-        if (!Files.exists(this.filePath)) {
+        final Path parentDir = this.filePath.getParent();
+        if (parentDir != null) {
             try {
-                final Path parentDir = this.filePath.getParent();
-                if (!Files.exists(parentDir)) {
-                    Files.createDirectories(parentDir);
-                }
-                Files.createFile(this.filePath);
+                Files.createDirectories(parentDir);
             }
             catch (IOException e) {
-                this.log.error("Unable to create config file at {}!", this.filePath);
+                this.log.error("Unable to create config directory for {}!", this.filePath);
                 throw new RuntimeException(e);
             }
         }
